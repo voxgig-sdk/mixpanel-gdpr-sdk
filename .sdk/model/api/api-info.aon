@@ -1,0 +1,50 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://mixpanel.com/get-support"
+      }
+      description: "The following retrieval and deletion API is made for GDPR and CCPA compliance."
+      license: {
+        name: "MIT"
+        url: "https://opensource.org/licenses/MIT"
+      }
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "OAuthToken"
+        type: "http"
+      }
+      servers: [
+        {
+          description: "Mixpanel's application API server."
+          url: "https://{regionAndDomain}.com/api/app"
+          variables: {
+            regionAndDomain: {
+              default: "mixpanel"
+              description: `The server location to be used:
+* \`mixpanel\` - The default (US) servers used for most projects
+* \`eu.mixpanel\` - EU servers if you are enrolled in EU Data Residency
+* \`in.mixpanel\` - India servers if you are enrolled in India Data Residency
+`
+              enum: [
+                "mixpanel"
+                "eu.mixpanel"
+                "in.mixpanel"
+              ]
+            }
+          }
+        }
+      ]
+      summary: "The following retrieval and deletion API is made for GDPR and CCPA compliance."
+      title: "GDPR API"
+      version: "3.0.0"
+      website: "https://mixpanel.com/get-support"
+    }
+  }
+}
+

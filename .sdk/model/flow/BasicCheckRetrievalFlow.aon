@@ -1,0 +1,32 @@
+# BasicCheckRetrievalFlow
+
+main: kit: flow: BasicCheckRetrievalFlow:
+{
+  entity: "check_retrieval",
+  kind: "basic",
+  name: "BasicCheckRetrievalFlow",
+  step: [
+    {
+      input: {
+        ref: "check_retrieval_ref01",
+        srcdatavar: "check_retrieval_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "check_retrieval01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-check_retrieval_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCheckRetrievalFlow"
+}

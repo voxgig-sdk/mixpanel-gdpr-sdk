@@ -1,0 +1,195 @@
+{
+  "existing": {
+    "check_retrieval": {
+      "CHECK_RETRIEVAL00": {
+        "distinct_ids": [],
+        "results": "s1f",
+        "status": "s20",
+        "tracking_id": "TRACKING01",
+        "id": "CHECK_RETRIEVAL00"
+      },
+      "CHECK_RETRIEVAL01": {
+        "distinct_ids": [],
+        "results": "s3d",
+        "status": "s3e",
+        "tracking_id": "TRACKING01",
+        "id": "CHECK_RETRIEVAL01"
+      },
+      "CHECK_RETRIEVAL02": {
+        "distinct_ids": [],
+        "results": "s5b",
+        "status": "s5c",
+        "tracking_id": "TRACKING01",
+        "id": "CHECK_RETRIEVAL02"
+      }
+    }
+  },
+  "new": {
+    "check_retrieval": {
+      "check_retrieval_ref01": {
+        "distinct_ids": [],
+        "results": "s79",
+        "status": "s7a"
+      }
+    }
+  },
+  "requests": {
+    "GET /data-retrievals/v3.0/{tracking_id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "get-retrieval",
+        "parameters": [
+          {
+            "description": "The task ID shown in the response",
+            "in": "path",
+            "name": "tracking_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your project token",
+            "in": "query",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "A JSON response object containing data about a retrieval job",
+                  "properties": {
+                    "results": {
+                      "properties": {
+                        "distinct_ids": {
+                          "example": [
+                            "distinct_id_1",
+                            "distinct_id_2",
+                            "distinct_id_3"
+                          ],
+                          "items": {
+                            "description": "Distinct IDs involved in the request",
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "results": {
+                          "description": "Link to the export if retrieval job is completed. Will be an empty string if job is incomplete",
+                          "example": "linktoexportfile.com/9871287366712",
+                          "type": "string"
+                        },
+                        "status": {
+                          "description": "The status of the job.",
+                          "enum": [
+                            "PENDING",
+                            "STAGING",
+                            "STARTED",
+                            "SUCCESS",
+                            "FAILURE",
+                            "REVOKED",
+                            "NOT_FOUND",
+                            "UNKNOWN"
+                          ],
+                          "example": "SUCCESS",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "status": {
+                      "description": "The status of the response",
+                      "example": "ok",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "results"
+                  ],
+                  "title": "CheckRetrievalResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Details about the error that occurred",
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "error"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Details about the error that occurred",
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "error"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "OAuthToken": []
+          }
+        ],
+        "securitySchemes": {
+          "OAuthToken": {
+            "description": "OAuth Token",
+            "scheme": "bearer",
+            "type": "http"
+          },
+          "ProjectSecret": {
+            "description": "Project Secret",
+            "scheme": "basic",
+            "type": "http"
+          },
+          "ServiceAccount": {
+            "description": "Service Account",
+            "scheme": "basic",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

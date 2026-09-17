@@ -1,0 +1,77 @@
+# Entity: cancel_a_deletion
+
+main: kit: entity: cancel_a_deletion: {
+
+  alias: field: {}
+
+  name: "cancel_a_deletion"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "tracking_id"
+                orig: "tracking_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "token"
+                orig: "token"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "DELETE /data-deletions/v3.0/{tracking_id}"
+            json: "{\"operationId\":\"delete-deletion\",\"parameters\":[{\"description\":\"The task ID shown in the response\",\"in\":\"path\",\"name\":\"tracking_id\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Your project token\",\"in\":\"query\",\"name\":\"token\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"204\":{\"description\":\"Success\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Details about the error that occurred\",\"type\":\"string\"},\"status\":{\"enum\":[\"error\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Details about the error that occurred\",\"type\":\"string\"},\"status\":{\"enum\":[\"error\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Forbidden\"}},\"security\":[{\"OAuthToken\":[]}],\"securitySchemes\":{\"OAuthToken\":{\"description\":\"OAuth Token\",\"scheme\":\"bearer\",\"type\":\"http\"},\"ProjectSecret\":{\"description\":\"Project Secret\",\"scheme\":\"basic\",\"type\":\"http\"},\"ServiceAccount\":{\"description\":\"Service Account\",\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "DELETE"
+          orig: "/data-deletions/v3.0/{tracking_id}"
+          segments: [
+            {
+              lit: "data-deletions"
+            }
+            {
+              lit: "v3.0"
+            }
+            {
+              var: "tracking_id"
+            }
+          ]
+          select: {
+            exist: [
+              "token"
+              "tracking_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v3.0"
+      ]
+    ]
+  }
+
+
+
+}

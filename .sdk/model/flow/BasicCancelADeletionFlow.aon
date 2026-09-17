@@ -1,0 +1,9 @@
+# BasicCancelADeletionFlow
+
+main: kit: flow: BasicCancelADeletionFlow:
+{
+  entity: "cancel_a_deletion",
+  kind: "basic",
+  name: "BasicCancelADeletionFlow",
+  "key$": "BasicCancelADeletionFlow"
+}

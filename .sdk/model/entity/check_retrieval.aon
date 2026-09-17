@@ -1,0 +1,97 @@
+# Entity: check_retrieval
+
+main: kit: entity: check_retrieval: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "distinct_ids"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "results"
+      req: false
+      short: "Link to the export if retrieval job is completed."
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: false
+      short: "The status of the job."
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "check_retrieval"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "tracking_id"
+                orig: "tracking_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "token"
+                orig: "token"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          contract: {
+            id: "GET /data-retrievals/v3.0/{tracking_id}"
+            json: "{\"operationId\":\"get-retrieval\",\"parameters\":[{\"description\":\"The task ID shown in the response\",\"in\":\"path\",\"name\":\"tracking_id\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Your project token\",\"in\":\"query\",\"name\":\"token\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":false,\"description\":\"A JSON response object containing data about a retrieval job\",\"properties\":{\"results\":{\"properties\":{\"distinct_ids\":{\"example\":[\"distinct_id_1\",\"distinct_id_2\",\"distinct_id_3\"],\"items\":{\"description\":\"Distinct IDs involved in the request\",\"type\":\"string\"},\"type\":\"array\"},\"results\":{\"description\":\"Link to the export if retrieval job is completed. Will be an empty string if job is incomplete\",\"example\":\"linktoexportfile.com/9871287366712\",\"type\":\"string\"},\"status\":{\"description\":\"The status of the job.\",\"enum\":[\"PENDING\",\"STAGING\",\"STARTED\",\"SUCCESS\",\"FAILURE\",\"REVOKED\",\"NOT_FOUND\",\"UNKNOWN\"],\"example\":\"SUCCESS\",\"type\":\"string\"}},\"type\":\"object\"},\"status\":{\"description\":\"The status of the response\",\"example\":\"ok\",\"type\":\"string\"}},\"required\":[\"status\",\"results\"],\"title\":\"CheckRetrievalResponse\",\"type\":\"object\"}}},\"description\":\"Success\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Details about the error that occurred\",\"type\":\"string\"},\"status\":{\"enum\":[\"error\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Details about the error that occurred\",\"type\":\"string\"},\"status\":{\"enum\":[\"error\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Forbidden\"}},\"security\":[{\"OAuthToken\":[]}],\"securitySchemes\":{\"OAuthToken\":{\"description\":\"OAuth Token\",\"scheme\":\"bearer\",\"type\":\"http\"},\"ProjectSecret\":{\"description\":\"Project Secret\",\"scheme\":\"basic\",\"type\":\"http\"},\"ServiceAccount\":{\"description\":\"Service Account\",\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
+          method: "GET"
+          orig: "/data-retrievals/v3.0/{tracking_id}"
+          segments: [
+            {
+              lit: "data-retrievals"
+            }
+            {
+              lit: "v3.0"
+            }
+            {
+              var: "tracking_id"
+            }
+          ]
+          select: {
+            exist: [
+              "token"
+              "tracking_id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "v3.0"
+      ]
+    ]
+  }
+
+
+
+}

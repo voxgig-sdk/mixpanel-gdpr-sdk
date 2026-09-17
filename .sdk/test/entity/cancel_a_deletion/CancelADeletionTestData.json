@@ -1,0 +1,124 @@
+{
+  "existing": {
+    "cancel_a_deletion": {
+      "CANCEL_A_DELETION00": {
+        "tracking_id": "TRACKING01",
+        "id": "CANCEL_A_DELETION00"
+      },
+      "CANCEL_A_DELETION01": {
+        "tracking_id": "TRACKING01",
+        "id": "CANCEL_A_DELETION01"
+      },
+      "CANCEL_A_DELETION02": {
+        "tracking_id": "TRACKING01",
+        "id": "CANCEL_A_DELETION02"
+      }
+    }
+  },
+  "new": {
+    "cancel_a_deletion": {
+      "cancel_a_deletion_ref01": {}
+    }
+  },
+  "requests": {
+    "DELETE /data-deletions/v3.0/{tracking_id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "delete-deletion",
+        "parameters": [
+          {
+            "description": "The task ID shown in the response",
+            "in": "path",
+            "name": "tracking_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your project token",
+            "in": "query",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Details about the error that occurred",
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "error"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "description": "Details about the error that occurred",
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "error"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "OAuthToken": []
+          }
+        ],
+        "securitySchemes": {
+          "OAuthToken": {
+            "description": "OAuth Token",
+            "scheme": "bearer",
+            "type": "http"
+          },
+          "ProjectSecret": {
+            "description": "Project Secret",
+            "scheme": "basic",
+            "type": "http"
+          },
+          "ServiceAccount": {
+            "description": "Service Account",
+            "scheme": "basic",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+# BasicCheckDeletionFlow
+
+main: kit: flow: BasicCheckDeletionFlow:
+{
+  entity: "check_deletion",
+  kind: "basic",
+  name: "BasicCheckDeletionFlow",
+  step: [
+    {
+      i: {
+        ref: "check_deletion_ref01",
+        srcdatavar: "check_deletion_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "check_deletion01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-check_deletion_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCheckDeletionFlow"
+}

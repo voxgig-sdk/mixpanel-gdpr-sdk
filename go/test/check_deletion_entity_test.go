@@ -98,7 +98,7 @@ func check_deletionBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"check_deletion01", "check_deletion02", "check_deletion03", "v3.001", "v3.002", "v3.003"},
+		[]any{"check_deletion01", "check_deletion02", "check_deletion03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

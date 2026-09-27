@@ -70,7 +70,7 @@ def _check_retrieval_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["check_retrieval01", "check_retrieval02", "check_retrieval03", "v3.001", "v3.002", "v3.003"],
+        ["check_retrieval01", "check_retrieval02", "check_retrieval03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

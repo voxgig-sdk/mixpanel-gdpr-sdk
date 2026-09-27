@@ -64,7 +64,7 @@ function cancel_a_deletion_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["cancel_a_deletion01", "cancel_a_deletion02", "cancel_a_deletion03", "v3.001", "v3.002", "v3.003"] as $k) {
+    foreach (["cancel_a_deletion01", "cancel_a_deletion02", "cancel_a_deletion03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

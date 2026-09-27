@@ -98,7 +98,7 @@ func check_retrievalBasicSetup(extra map[string]any) *entityTestSetup {
 
 	// Generate idmap via transform, matching TS pattern.
 	idmap, _ := vs.Transform(
-		[]any{"check_retrieval01", "check_retrieval02", "check_retrieval03", "v3.001", "v3.002", "v3.003"},
+		[]any{"check_retrieval01", "check_retrieval02", "check_retrieval03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
 				"`$KEY`": "`$COPY`",

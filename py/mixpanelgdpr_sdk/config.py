@@ -200,26 +200,6 @@ def make_config():
             "name": "remove",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "tracking_id",
-                      "orig": "tracking_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "token",
-                      "orig": "token",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/data-deletions/v3.0/{tracking_id}",
@@ -234,75 +214,99 @@ def make_config():
                     "var": "tracking_id",
                   },
                 ],
+                "parts": [
+                  "data-deletions",
+                  "v3.0",
+                  "{tracking_id}",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "tracking_id",
+                      "orig": "tracking_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                  "query": [
+                    {
+                      "name": "token",
+                      "orig": "token",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "token",
                     "tracking_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "data-deletions",
-                  "v3.0",
-                  "{tracking_id}",
-                ],
               },
             ],
           },
         },
         "relations": {
-          "ancestors": [
-            [
-              "v3.0",
-            ],
-          ],
+          "ancestors": [],
         },
       },
       "check_deletion": {
         "fields": [
           {
             "name": "compliance_type",
+            "title": "Compliance Type",
+            "type": "`$STRING`",
             "req": True,
             "short": "GDPR or CCPA",
-            "type": "`$STRING`",
           },
           {
             "name": "date_requested",
+            "title": "Date Requested",
+            "type": "`$STRING`",
             "req": True,
             "short": "The timestamp when the deletion job was requested",
-            "type": "`$STRING`",
           },
           {
             "name": "distinct_ids",
-            "req": True,
+            "title": "Distinct Ids",
             "type": "`$ARRAY`",
+            "req": True,
           },
           {
             "name": "project_id",
+            "title": "Project Id",
+            "type": "`$NUMBER`",
             "req": True,
             "short": "The id of the project this job is for",
-            "type": "`$NUMBER`",
           },
           {
             "name": "requesting_user",
+            "title": "Requesting User",
+            "type": "`$STRING`",
             "req": True,
             "short": "The user that created the deletion job request",
-            "type": "`$STRING`",
           },
           {
             "name": "status",
+            "title": "Status",
+            "type": "`$STRING`",
             "req": True,
             "short": "The status of the job.",
-            "type": "`$STRING`",
           },
           {
             "name": "tracking_id",
+            "title": "Tracking Id",
+            "type": "`$STRING`",
             "req": True,
             "short": "The tracking id of the deletion job",
-            "type": "`$STRING`",
           },
         ],
         "name": "check_deletion",
@@ -312,26 +316,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "tracking_id",
-                      "orig": "tracking_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "token",
-                      "orig": "token",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/data-deletions/v3.0/{tracking_id}",
@@ -346,48 +330,68 @@ def make_config():
                     "var": "tracking_id",
                   },
                 ],
+                "parts": [
+                  "data-deletions",
+                  "v3.0",
+                  "{tracking_id}",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.results`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "tracking_id",
+                      "orig": "tracking_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                  "query": [
+                    {
+                      "name": "token",
+                      "orig": "token",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "token",
                     "tracking_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.results`",
-                },
-                "parts": [
-                  "data-deletions",
-                  "v3.0",
-                  "{tracking_id}",
-                ],
               },
             ],
           },
         },
         "relations": {
-          "ancestors": [
-            [
-              "v3.0",
-            ],
-          ],
+          "ancestors": [],
         },
       },
       "check_retrieval": {
         "fields": [
           {
             "name": "distinct_ids",
+            "title": "Distinct Ids",
             "type": "`$ARRAY`",
           },
           {
             "name": "results",
-            "short": "Link to the export if retrieval job is completed.",
+            "title": "Results",
             "type": "`$STRING`",
+            "short": "Link to the export if retrieval job is completed.",
           },
           {
             "name": "status",
-            "short": "The status of the job.",
+            "title": "Status",
             "type": "`$STRING`",
+            "short": "The status of the job.",
           },
         ],
         "name": "check_retrieval",
@@ -397,26 +401,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "kind": "param",
-                      "name": "tracking_id",
-                      "orig": "tracking_id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "token",
-                      "orig": "token",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/data-retrievals/v3.0/{tracking_id}",
@@ -431,47 +415,67 @@ def make_config():
                     "var": "tracking_id",
                   },
                 ],
+                "parts": [
+                  "data-retrievals",
+                  "v3.0",
+                  "{tracking_id}",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.results`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "tracking_id",
+                      "orig": "tracking_id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                    },
+                  ],
+                  "query": [
+                    {
+                      "name": "token",
+                      "orig": "token",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "token",
                     "tracking_id",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.results`",
-                },
-                "parts": [
-                  "data-retrievals",
-                  "v3.0",
-                  "{tracking_id}",
-                ],
               },
             ],
           },
         },
         "relations": {
-          "ancestors": [
-            [
-              "v3.0",
-            ],
-          ],
+          "ancestors": [],
         },
       },
       "v30": {
         "fields": [
           {
             "name": "compliance_type",
-            "short": "Select CCPA or GDPR.",
+            "title": "Compliance Type",
             "type": "`$STRING`",
+            "short": "Select CCPA or GDPR.",
           },
           {
             "name": "disclosure_type",
-            "short": "Only required if compliance_type = CCPA.",
+            "title": "Disclosure Type",
             "type": "`$STRING`",
+            "short": "Only required if compliance_type = CCPA.",
           },
           {
             "name": "distinct_ids",
+            "title": "Distinct Ids",
             "type": "`$ARRAY`",
           },
         ],
@@ -482,17 +486,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "token",
-                      "orig": "token",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "POST",
                 "orig": "/data-deletions/v3.0",
@@ -504,32 +497,33 @@ def make_config():
                     "lit": "v3.0",
                   },
                 ],
+                "parts": [
+                  "data-deletions",
+                  "v3.0",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.results`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "token",
+                      "orig": "token",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "token",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.results`",
-                },
-                "parts": [
-                  "data-deletions",
-                  "v3.0",
-                ],
               },
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "token",
-                      "orig": "token",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "POST",
                 "orig": "/data-retrievals/v3.0",
@@ -541,19 +535,31 @@ def make_config():
                     "lit": "v3.0",
                   },
                 ],
+                "parts": [
+                  "data-retrievals",
+                  "v3.0",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.results`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "token",
+                      "orig": "token",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "token",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.results`",
-                },
-                "parts": [
-                  "data-retrievals",
-                  "v3.0",
-                ],
               },
             ],
           },

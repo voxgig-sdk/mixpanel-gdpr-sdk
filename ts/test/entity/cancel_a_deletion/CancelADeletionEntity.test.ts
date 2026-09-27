@@ -25,10 +25,6 @@ import {
 } from '../../utility'
 
 
-// AFTER the imports on purpose: TypeScript hoists `import` above any
-// statement in the emitted CommonJS, so a loader placed above them would
-// run only after every imported module had already been evaluated - and
-// anything reading process.env at module scope would miss these values.
 loadEnvLocal(__dirname + '/../../../.env.local')
 
 
@@ -55,7 +51,7 @@ describe('CancelADeletionEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[],"name":"cancel_a_deletion","op":{"remove":{"input":"data","name":"remove","points":[{"active":true,"args":{"params":[{"active":true,"kind":"param","name":"tracking_id","orig":"tracking_id","reqd":true,"type":"`$STRING`","index$":0}],"query":[{"active":true,"kind":"query","name":"token","orig":"token","reqd":true,"type":"`$STRING`","index$":0}]},"contract":{"id":"DELETE /data-deletions/v3.0/{tracking_id}","json":"{\"operationId\":\"delete-deletion\",\"parameters\":[{\"description\":\"The task ID shown in the response\",\"in\":\"path\",\"name\":\"tracking_id\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Your project token\",\"in\":\"query\",\"name\":\"token\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"204\":{\"description\":\"Success\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Details about the error that occurred\",\"type\":\"string\"},\"status\":{\"enum\":[\"error\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized\"},\"403\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Details about the error that occurred\",\"type\":\"string\"},\"status\":{\"enum\":[\"error\"],\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Forbidden\"}},\"security\":[{\"OAuthToken\":[]}],\"securitySchemes\":{\"OAuthToken\":{\"description\":\"OAuth Token\",\"scheme\":\"bearer\",\"type\":\"http\"},\"ProjectSecret\":{\"description\":\"Project Secret\",\"scheme\":\"basic\",\"type\":\"http\"},\"ServiceAccount\":{\"description\":\"Service Account\",\"scheme\":\"basic\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"DELETE","orig":"/data-deletions/v3.0/{tracking_id}","segments":[{"lit":"data-deletions"},{"lit":"v3.0"},{"var":"tracking_id"}],"select":{"exist":["token","tracking_id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"remove"}},"relations":{"ancestors":[["v3.0"]]},"key$":"cancel_a_deletion","name__orig":"cancel_a_deletion","Name":"CancelADeletion","name_":"cancel_a_deletion","name-":"cancel-a-deletion","NAME":"CANCEL_A_DELETION","index$":0}, {"active":true,"entity":"cancel_a_deletion","key$":"BasicCancelADeletionFlow","kind":"basic","name":"BasicCancelADeletionFlow","param":{},"step":[]}, 'CancelADeletion')
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"cancel_a_deletion","op":{"remove":{"input":"data","name":"remove","points":[{"a":true,"co":{"id":"DELETE /data-deletions/v3.0/{tracking_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"tracking_id","or":"tracking_id","r":true,"t":"`$STRING`","index$":0}],"query":[{"a":true,"k":"query","n":"token","or":"token","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"DELETE","o":"/data-deletions/v3.0/{tracking_id}","q":{"exist":["token","tracking_id"]},"r":{},"s":[{"lit":"data-deletions"},{"lit":"v3.0"},{"var":"tracking_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"remove"}},"relations":{"ancestors":[]},"key$":"cancel_a_deletion","name__orig":"cancel_a_deletion","Name":"CancelADeletion","name_":"cancel_a_deletion","name-":"cancel-a-deletion","NAME":"CANCEL_A_DELETION","index$":0}, {"active":true,"entity":"cancel_a_deletion","key$":"BasicCancelADeletionFlow","kind":"basic","name":"BasicCancelADeletionFlow","param":{},"step":[]}, 'CancelADeletion', {"DELETE /data-deletions/v3.0/{tracking_id}":{"protocol":"http","parameters":[{"name":"tracking_id","in":"path","schema":{"type":"string"},"description":"The task ID shown in the response","required":true,"x-ref":"#/components/parameters/TrackingId","index$":0},{"name":"token","in":"query","schema":{"type":"string"},"description":"Your project token","required":true,"x-ref":"#/components/parameters/ProjectToken","index$":1}]}})
     }
     const client = setup.client
     const struct = setup.struct
@@ -93,7 +89,7 @@ function basicSetup(extra?: any) {
   const transform = struct.transform
 
   let idmap = transform(
-    ['cancel_a_deletion01','cancel_a_deletion02','cancel_a_deletion03','v3.001','v3.002','v3.003'],
+    ['cancel_a_deletion01','cancel_a_deletion02','cancel_a_deletion03'],
     {
       '`$PACK`': ['', {
         '`$KEY`': '`$COPY`',

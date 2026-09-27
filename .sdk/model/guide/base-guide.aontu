@@ -1,0 +1,42 @@
+# Generated from the API definition and overwritten on every build: do not
+# edit this file. Put customizations in the guide entry file, which includes
+# this one and overrides its defaults:
+#   guide.aontu
+
+guide: {
+  metrics: count: entity: 4
+  metrics: count: path: 4
+  metrics: count: method: 5
+
+  entity: cancel_a_deletion: {
+    path: "/data-deletions/v3.0/{tracking_id}": {
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: check_deletion: {
+    path: "/data-deletions/v3.0/{tracking_id}": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.results`")|top
+    }
+  }
+
+  entity: check_retrieval: {
+    path: "/data-retrievals/v3.0/{tracking_id}": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.results`")|top
+    }
+  }
+
+  entity: v30: {
+    path: "/data-deletions/v3.0": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.results`")|top
+    }
+    path: "/data-retrievals/v3.0": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.results`")|top
+    }
+  }
+
+}

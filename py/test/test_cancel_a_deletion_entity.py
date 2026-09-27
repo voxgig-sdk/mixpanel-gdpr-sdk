@@ -64,7 +64,7 @@ def _cancel_a_deletion_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["cancel_a_deletion01", "cancel_a_deletion02", "cancel_a_deletion03", "v3.001", "v3.002", "v3.003"],
+        ["cancel_a_deletion01", "cancel_a_deletion02", "cancel_a_deletion03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

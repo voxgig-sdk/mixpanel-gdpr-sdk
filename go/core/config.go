@@ -175,26 +175,6 @@ func MakeConfig() map[string]any {
 						"name": "remove",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "tracking_id",
-											"orig": "tracking_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "token",
-											"orig": "token",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "DELETE",
 								"orig": "/data-deletions/v3.0/{tracking_id}",
@@ -209,75 +189,99 @@ func MakeConfig() map[string]any {
 										"var": "tracking_id",
 									},
 								},
+								"parts": []any{
+									"data-deletions",
+									"v3.0",
+									"{tracking_id}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "tracking_id",
+											"orig": "tracking_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "token",
+											"orig": "token",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"token",
 										"tracking_id",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"data-deletions",
-									"v3.0",
-									"{tracking_id}",
-								},
 							},
 						},
 					},
 				},
 				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"v3.0",
-						},
-					},
+					"ancestors": []any{},
 				},
 			},
 			"check_deletion": map[string]any{
 				"fields": []any{
 					map[string]any{
 						"name": "compliance_type",
+						"title": "Compliance Type",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "GDPR or CCPA",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "date_requested",
+						"title": "Date Requested",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The timestamp when the deletion job was requested",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "distinct_ids",
-						"req": true,
+						"title": "Distinct Ids",
 						"type": "`$ARRAY`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "project_id",
+						"title": "Project Id",
+						"type": "`$NUMBER`",
 						"req": true,
 						"short": "The id of the project this job is for",
-						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "requesting_user",
+						"title": "Requesting User",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The user that created the deletion job request",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "status",
+						"title": "Status",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The status of the job.",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "tracking_id",
+						"title": "Tracking Id",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "The tracking id of the deletion job",
-						"type": "`$STRING`",
 					},
 				},
 				"name": "check_deletion",
@@ -287,26 +291,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "tracking_id",
-											"orig": "tracking_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "token",
-											"orig": "token",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/data-deletions/v3.0/{tracking_id}",
@@ -321,48 +305,68 @@ func MakeConfig() map[string]any {
 										"var": "tracking_id",
 									},
 								},
+								"parts": []any{
+									"data-deletions",
+									"v3.0",
+									"{tracking_id}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.results`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "tracking_id",
+											"orig": "tracking_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "token",
+											"orig": "token",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"token",
 										"tracking_id",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.results`",
-								},
-								"parts": []any{
-									"data-deletions",
-									"v3.0",
-									"{tracking_id}",
-								},
 							},
 						},
 					},
 				},
 				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"v3.0",
-						},
-					},
+					"ancestors": []any{},
 				},
 			},
 			"check_retrieval": map[string]any{
 				"fields": []any{
 					map[string]any{
 						"name": "distinct_ids",
+						"title": "Distinct Ids",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "results",
-						"short": "Link to the export if retrieval job is completed.",
+						"title": "Results",
 						"type": "`$STRING`",
+						"short": "Link to the export if retrieval job is completed.",
 					},
 					map[string]any{
 						"name": "status",
-						"short": "The status of the job.",
+						"title": "Status",
 						"type": "`$STRING`",
+						"short": "The status of the job.",
 					},
 				},
 				"name": "check_retrieval",
@@ -372,26 +376,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "tracking_id",
-											"orig": "tracking_id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "token",
-											"orig": "token",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/data-retrievals/v3.0/{tracking_id}",
@@ -406,47 +390,67 @@ func MakeConfig() map[string]any {
 										"var": "tracking_id",
 									},
 								},
+								"parts": []any{
+									"data-retrievals",
+									"v3.0",
+									"{tracking_id}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.results`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "tracking_id",
+											"orig": "tracking_id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "token",
+											"orig": "token",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"token",
 										"tracking_id",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.results`",
-								},
-								"parts": []any{
-									"data-retrievals",
-									"v3.0",
-									"{tracking_id}",
-								},
 							},
 						},
 					},
 				},
 				"relations": map[string]any{
-					"ancestors": []any{
-						[]any{
-							"v3.0",
-						},
-					},
+					"ancestors": []any{},
 				},
 			},
 			"v30": map[string]any{
 				"fields": []any{
 					map[string]any{
 						"name": "compliance_type",
-						"short": "Select CCPA or GDPR.",
+						"title": "Compliance Type",
 						"type": "`$STRING`",
+						"short": "Select CCPA or GDPR.",
 					},
 					map[string]any{
 						"name": "disclosure_type",
-						"short": "Only required if compliance_type = CCPA.",
+						"title": "Disclosure Type",
 						"type": "`$STRING`",
+						"short": "Only required if compliance_type = CCPA.",
 					},
 					map[string]any{
 						"name": "distinct_ids",
+						"title": "Distinct Ids",
 						"type": "`$ARRAY`",
 					},
 				},
@@ -457,17 +461,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "token",
-											"orig": "token",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/data-deletions/v3.0",
@@ -479,32 +472,33 @@ func MakeConfig() map[string]any {
 										"lit": "v3.0",
 									},
 								},
+								"parts": []any{
+									"data-deletions",
+									"v3.0",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.results`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "token",
+											"orig": "token",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"token",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.results`",
-								},
-								"parts": []any{
-									"data-deletions",
-									"v3.0",
-								},
 							},
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "token",
-											"orig": "token",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/data-retrievals/v3.0",
@@ -516,18 +510,30 @@ func MakeConfig() map[string]any {
 										"lit": "v3.0",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"token",
-									},
+								"parts": []any{
+									"data-retrievals",
+									"v3.0",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.results`",
 								},
-								"parts": []any{
-									"data-retrievals",
-									"v3.0",
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "token",
+											"orig": "token",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"token",
+									},
 								},
 							},
 						},

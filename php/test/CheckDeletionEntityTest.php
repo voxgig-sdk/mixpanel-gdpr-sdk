@@ -70,7 +70,7 @@ function check_deletion_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["check_deletion01", "check_deletion02", "check_deletion03", "v3.001", "v3.002", "v3.003"] as $k) {
+    foreach (["check_deletion01", "check_deletion02", "check_deletion03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

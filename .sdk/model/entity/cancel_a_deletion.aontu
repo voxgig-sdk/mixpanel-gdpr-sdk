@@ -1,0 +1,71 @@
+# Entity: cancel_a_deletion
+
+main: kit: entity: cancel_a_deletion: {
+
+  alias: field: {}
+
+  name: "cancel_a_deletion"
+  op: {
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /data-deletions/v3.0/{tracking_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "tracking_id"
+                or: "tracking_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "token"
+                or: "token"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/data-deletions/v3.0/{tracking_id}"
+          q: {
+            exist: [
+              "token"
+              "tracking_id"
+            ]
+          }
+          s: [
+            {
+              lit: "data-deletions"
+            }
+            {
+              lit: "v3.0"
+            }
+            {
+              var: "tracking_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

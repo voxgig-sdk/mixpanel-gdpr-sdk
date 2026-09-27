@@ -70,7 +70,7 @@ function check_retrieval_basic_setup($extra)
 
     // Generate idmap.
     $idmap = [];
-    foreach (["check_retrieval01", "check_retrieval02", "check_retrieval03", "v3.001", "v3.002", "v3.003"] as $k) {
+    foreach (["check_retrieval01", "check_retrieval02", "check_retrieval03"] as $k) {
         $idmap[$k] = strtoupper($k);
     }
 

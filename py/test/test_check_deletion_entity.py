@@ -70,7 +70,7 @@ def _check_deletion_basic_setup(extra):
 
     # Generate idmap via transform.
     idmap = vs.transform(
-        ["check_deletion01", "check_deletion02", "check_deletion03", "v3.001", "v3.002", "v3.003"],
+        ["check_deletion01", "check_deletion02", "check_deletion03"],
         {
             "`$PACK`": ["", {
                 "`$KEY`": "`$COPY`",

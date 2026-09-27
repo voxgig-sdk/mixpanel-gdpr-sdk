@@ -1,0 +1,119 @@
+# Entity: check_deletion
+
+main: kit: entity: check_deletion: {
+
+  alias: field: {}
+
+  fields: {
+    compliance_type: {
+      h: "Compliance Type"
+      n: "compliance_type"
+      r: true
+      sh: "GDPR or CCPA"
+      t: "`$STRING`"
+    }
+    date_requested: {
+      h: "Date Requested"
+      n: "date_requested"
+      r: true
+      sh: "The timestamp when the deletion job was requested"
+      t: "`$STRING`"
+    }
+    distinct_ids: {
+      h: "Distinct Ids"
+      n: "distinct_ids"
+      r: true
+      t: "`$ARRAY`"
+    }
+    project_id: {
+      h: "Project Id"
+      n: "project_id"
+      r: true
+      sh: "The id of the project this job is for"
+      t: "`$NUMBER`"
+    }
+    requesting_user: {
+      h: "Requesting User"
+      n: "requesting_user"
+      r: true
+      sh: "The user that created the deletion job request"
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      sh: "The status of the job."
+      t: "`$STRING`"
+    }
+    tracking_id: {
+      h: "Tracking Id"
+      n: "tracking_id"
+      r: true
+      sh: "The tracking id of the deletion job"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "check_deletion"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /data-deletions/v3.0/{tracking_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "tracking_id"
+                or: "tracking_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "token"
+                or: "token"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/data-deletions/v3.0/{tracking_id}"
+          q: {
+            exist: [
+              "token"
+              "tracking_id"
+            ]
+          }
+          s: [
+            {
+              lit: "data-deletions"
+            }
+            {
+              lit: "v3.0"
+            }
+            {
+              var: "tracking_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

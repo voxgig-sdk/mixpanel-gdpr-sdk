@@ -1,0 +1,115 @@
+# Entity: v30
+
+main: kit: entity: v30: {
+
+  alias: field: {}
+
+  fields: {
+    compliance_type: {
+      h: "Compliance Type"
+      n: "compliance_type"
+      r: false
+      sh: "Select CCPA or GDPR."
+      t: "`$STRING`"
+    }
+    disclosure_type: {
+      h: "Disclosure Type"
+      n: "disclosure_type"
+      r: false
+      sh: "Only required if compliance_type = CCPA."
+      t: "`$STRING`"
+    }
+    distinct_ids: {
+      h: "Distinct Ids"
+      n: "distinct_ids"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "v30"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /data-deletions/v3.0"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "token"
+                or: "token"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/data-deletions/v3.0"
+          q: {
+            exist: [
+              "token"
+            ]
+          }
+          s: [
+            {
+              lit: "data-deletions"
+            }
+            {
+              lit: "v3.0"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+        {
+          co: {
+            id: "POST /data-retrievals/v3.0"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "token"
+                or: "token"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/data-retrievals/v3.0"
+          q: {
+            exist: [
+              "token"
+            ]
+          }
+          s: [
+            {
+              lit: "data-retrievals"
+            }
+            {
+              lit: "v3.0"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

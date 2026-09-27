@@ -1,7 +1,7 @@
 // Typed models for the MixpanelGdpr SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -24,13 +24,6 @@ type CancelADeletionRemoveMatch struct {
 
 // CheckDeletion is the typed data model for the check_deletion entity.
 type CheckDeletion struct {
-	ComplianceType string `json:"compliance_type"`
-	DateRequested string `json:"date_requested"`
-	DistinctIds []any `json:"distinct_ids"`
-	ProjectId float64 `json:"project_id"`
-	RequestingUser string `json:"requesting_user"`
-	Status string `json:"status"`
-	TrackingId string `json:"tracking_id"`
 }
 
 // CheckDeletionLoadMatch is the typed request payload for CheckDeletion.LoadTyped.
@@ -41,9 +34,6 @@ type CheckDeletionLoadMatch struct {
 
 // CheckRetrieval is the typed data model for the check_retrieval entity.
 type CheckRetrieval struct {
-	DistinctIds *[]any `json:"distinct_ids,omitempty"`
-	Results *string `json:"results,omitempty"`
-	Status *string `json:"status,omitempty"`
 }
 
 // CheckRetrievalLoadMatch is the typed request payload for CheckRetrieval.LoadTyped.
@@ -54,9 +44,6 @@ type CheckRetrievalLoadMatch struct {
 
 // V30 is the typed data model for the v30 entity.
 type V30 struct {
-	ComplianceType *string `json:"compliance_type,omitempty"`
-	DisclosureType *string `json:"disclosure_type,omitempty"`
-	DistinctIds *[]any `json:"distinct_ids,omitempty"`
 }
 
 // V30CreateData is the typed request payload for V30.CreateTyped.
